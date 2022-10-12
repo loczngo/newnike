@@ -3,6 +3,7 @@ import classNames from 'classnames/bind'
 import styles from "./Contact.module.css"
 import logo1 from '../../img/contact.bmp'
 import {GoLocation} from 'react-icons/go'
+import {AiOutlineMail} from 'react-icons/ai'
 import logo2 from '../../img/logo1.png'
 
 
@@ -27,7 +28,7 @@ function Contact() {
                         </div>
                  
                         <div className="mail d-flex align-items-center my-1">
-                            <span className={cx('icon-contact')}><i className="fa-solid fa-envelope"></i></span>
+                            <span className={cx('icon-contact')}><AiOutlineMail/></span>
                             <span className="ml-3">loczngo@gmail.com</span>
                         </div>
                         <div className="fb d-flex align-items-center my-1">

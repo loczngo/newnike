@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as productService from "../../../services/productServices";
+import BoxSearch from "./BoxSearch/BoxSearch";
 import banner from "../../img/LG-nike-fixx.jpg";
 import logo from "../../img/logo-bar.jpg";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
@@ -9,6 +11,24 @@ import classNames from "classnames/bind";
 let cx = classNames.bind(styles);
 
 function Header() {
+  const [keyWord, setKeyWord] = useState("");
+  const [showProducts, setShowProducts] = useState([]);
+  const reset = () => {
+    setKeyWord("");
+  };
+  useEffect(() => {
+    const filterByKeyName = async (keyWord) => {
+      const data = await productService.filterByKeyName(keyWord);
+      setShowProducts(data);
+      console.log(keyWord);
+      console.log(data);
+    };
+    const timeOut = setTimeout(() => {
+      filterByKeyName(keyWord);
+    }, 300);
+    return () => clearTimeout(timeOut);
+  }, [keyWord]);
+
   return (
     <>
       <div className={cx("banner")}>
@@ -49,13 +69,13 @@ function Header() {
                   placeholder="Search"
                   type="text"
                   className={cx("search-in")}
+                  onChange={e => setKeyWord(e.target.value.trim())}
                 />
                 <span className={cx("s-icon")}>
                   <AiOutlineSearch />
                 </span>
               </div>
             </div>
-
             <div className={cx("col-md-1", "nav-b")}>
               <Link to="/cart" className={cx("cart-icon")}>
                 <AiOutlineShoppingCart />
@@ -68,6 +88,9 @@ function Header() {
             </div>
           </div>
         </div>
+        {keyWord !== "" && (
+          <BoxSearch keyWord={keyWord} data={showProducts} reset={reset} />
+        )}
       </div>
     </>
   );

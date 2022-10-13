@@ -10,7 +10,7 @@
 .menu-bar {
     width: 100%;
     background-color: #7f7f7f;
-    position: sticky;
+    position: relative;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 30px;

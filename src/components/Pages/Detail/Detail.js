@@ -1,16 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
 import classNames from "classnames/bind";
 import style from "./detail.module.css";
 
 const cx = classNames.bind(style);
 
 function Detail() {
+  const [apiData, setApiData] = useState({});
   const url = "http://localhost:9090/product";
   const { id } = useParams();
   const navigate = useNavigate();
-  const [apiData, setApiData] = useState({});
 
   useEffect(() => {
     axios
@@ -24,16 +24,20 @@ function Detail() {
       });
   }, [id]);
 
-  
+
   const addToCartt = (data) => {
-    var itemss = JSON.parse(localStorage.getItem("cart"), "[]");
+    if(JSON.parse(localStorage.getItem("cart") === null)){
+      
+      localStorage.setItem("cart", JSON.stringify([]))
+    }
+    var cartss = JSON.parse(localStorage.getItem("cart"), "[]");
+    console.log(cartss);
     var newItem = {
       ...data,
     };
     console.log(newItem);
-    itemss.push(newItem);
-    localStorage.setItem("cart", JSON.stringify(itemss));
-    console.log(itemss);
+    cartss.push(newItem);
+    localStorage.setItem("cart", JSON.stringify(cartss));
 
     navigate("/cart");
   };
@@ -88,36 +92,34 @@ function Detail() {
         <div className="choices mt-4">
           <button
             className="btn btn-dark"
-            onClick={(e) => {
-              addToCartt(apiData);
-            }}
-            style={{ width: "400px" }}
+            onClick={ e => addToCartt(apiData) }
+          style={{ width: "400px" }}
           >
-            Put it in cart
-          </button>{" "}
-          <button className="btn btn-dark" style={{ width: "350px" }}>
-            Buy Now
-          </button>{" "}
-          <button className="btn btn-dark" style={{ width: "350px" }}>
-            Favourite <i className="bi bi-calendar2-heart-fill"></i>
-          </button>
-        </div>
-        <p className="mt-2">Review: </p>
-        <textarea name="" id="" cols="125" rows="10"></textarea>
-        <div className="rightsidechose">
-          <button type="submit" className="btn btn-secondary">
-            <i className="bi bi-send"></i>
-          </button>{" "}
-          <button className="btn btn-secondary">
-            {" "}
-            <i className="bi bi-camera"></i>
-          </button>{" "}
-          <button className="btn btn-secondary">
-            <i className="bi bi-emoji-smile"></i>
-          </button>
-        </div>
+          Put it in cart
+        </button>{" "}
+        <button className="btn btn-dark" style={{ width: "350px" }}>
+          Buy Now
+        </button>{" "}
+        <button className="btn btn-dark" style={{ width: "350px" }}>
+          Favourite <i className="bi bi-calendar2-heart-fill"></i>
+        </button>
       </div>
-    </main>
+      <p className="mt-2">Review: </p>
+      <textarea name="" id="" cols="125" rows="10"></textarea>
+      <div className="rightsidechose">
+        <button type="submit" className="btn btn-secondary">
+          <i className="bi bi-send"></i>
+        </button>{" "}
+        <button className="btn btn-secondary">
+          {" "}
+          <i className="bi bi-camera"></i>
+        </button>{" "}
+        <button className="btn btn-secondary">
+          <i className="bi bi-emoji-smile"></i>
+        </button>
+      </div>
+    </div>
+    </main >
   );
 }
 

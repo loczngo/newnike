@@ -32,7 +32,7 @@ function Men() {
                   <div className="card">
                     <img className="card-img-top" src={item.img} alt="Card cap" />
                     <div className="card-body">
-                      <h5 className="card-title">c{item.name}</h5>
+                      <h5 className="card-title">{item.name}</h5>
                       <p className="card-text">{item.price}</p>
                       <p className="card-text">
                         <small className="text-muted">

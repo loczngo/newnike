@@ -8,7 +8,7 @@ function Kids() {
 
   useEffect(() => {
     axios
-      .get(`${url}?prod_id=3`)
+      .get(`${url}?category_id=3`)
       .then((res) => {
         setApiData(res.data);
       })
@@ -20,7 +20,7 @@ function Kids() {
   return (
     <div className="p-5">
       <div className="text-center">
-        <h1>All Products Of: Women</h1>
+        <h1>All Products Of: Kids</h1>
       </div>
 
       <div className="container">

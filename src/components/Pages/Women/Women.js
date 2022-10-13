@@ -8,7 +8,7 @@ function Women() {
 
   useEffect(() => {
     axios
-      .get(`${url}?prod_id=2`)
+      .get(`${url}?category_id=2`)
       .then((res) => {
         setApiData(res.data);
       })

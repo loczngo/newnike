@@ -14,6 +14,7 @@ import Women from './components/Pages/Women/Women';
 import Kids from './components/Pages/Kids/Kids';
 import Detail from './components/Pages/Detail/Detail';
 import Cart from './components/Pages/Cart/Cart';
+import Register from './components/Pages/Register/Register';
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
         <Route
           path="/login"
           element={<Masterlayout children={<Login />} />}
+        ></Route>
+        <Route
+          path="/register"
+          element={<Masterlayout children={<Register />} />}
         ></Route>
         <Route
           path="/productdetails/:id"

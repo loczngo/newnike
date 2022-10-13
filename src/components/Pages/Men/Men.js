@@ -8,7 +8,7 @@ function Men() {
 
   useEffect(() => {
     axios
-      .get(`${url}?prod_id=1`)
+      .get(`${url}?category_id=1`)
       .then((res) => {
         setApiData(res.data);
       })
